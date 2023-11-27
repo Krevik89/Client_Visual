@@ -1,0 +1,23 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Canvas>
+        <Button x:Name="Accept" Height="50"
+                Width="117" 
+                Canvas.Left="48"
+                Canvas.Top="34"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center" Click="Accept_Click"/>
+        <TextBox x:Name="textout" Height="121"
+                 Width="562"
+                 Canvas.Left="189"
+                 Canvas.Top="34"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"/>
+    </Canvas>
+</Window>
