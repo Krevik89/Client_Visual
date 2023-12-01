@@ -19,24 +19,25 @@ namespace ClientSpace
     /// Логика взаимодействия для Window_authentification.xaml
     /// </summary>
     public partial class Window_authentification : Window
-    {      
-        
-
-        public Window_authentification()
+    {            
+       public Window_authentification()
         {
             InitializeComponent();
             
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+       private async void Button_Click(object sender, RoutedEventArgs e)
         {
             Client client;
             client = new Client();
             
             client.ConnectAsync(new IPEndPoint(IPAddress.Parse("192.168.88.75"), 50000));
-            client.WriteAsync(Encoding.Unicode.GetBytes(Login_box.Text + " " + Password_box.Text));
-            
-            if (Encoding.Unicode.GetString(await client.ReadAsync()) == "yes") 
+            await Task.Delay(1000);
+            client.WriteAsync(Encoding.Unicode.GetBytes("auth" + Login_box.Text + " " + Password_box.Text));
+
+            string str = Encoding.Unicode.GetString(await client.ReadAsync()).Replace("\0","");
+
+            if (str == "yes") 
             {
                 MainWindow mainWindow = new MainWindow(client);
                 mainWindow.Show();
@@ -44,7 +45,7 @@ namespace ClientSpace
             }
             else
             {
-                MessageBox.Show("Wrong login or password");
+                MessageBox.Show(Encoding.Unicode.GetString(await client.ReadAsync()));
             }
 
         }
