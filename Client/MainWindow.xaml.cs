@@ -34,8 +34,6 @@ namespace Client
                     
         }
 
-        
-
         private  void Method(string str)
         {
             client = new TcpClient();
