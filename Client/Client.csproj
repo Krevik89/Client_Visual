@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Client.cs" />
     <Compile Include="Window_authentification.xaml.cs">
       <DependentUpon>Window_authentification.xaml</DependentUpon>
     </Compile>

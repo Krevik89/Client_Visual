@@ -16,57 +16,28 @@ using System.Windows.Shapes;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Client
+namespace ClientSpace
 {
     
     public partial class MainWindow : Window
     {
-        TcpClient client; 
-        public MainWindow()
+        Client Client;
+        public MainWindow(Client client)
         {
             InitializeComponent();
+            Client = client;
         }
 
         private async  void Accept_Click(object sender, RoutedEventArgs e)
         {
-            
-            Method("exit123");
-                    
-        }
-
-        private  void Method(string str)
-        {
-            client = new TcpClient();
-            try
-            {
-                 client.Connect(IPAddress.Parse("192.168.88.75"), 50000);
-
-                NetworkStream stream = client.GetStream();
-
-                byte[] data = Encoding.Unicode.GetBytes(str);
-                stream.Write(data, 0, data.Length);
-
-                byte[] buffer = new byte[256];
-                stream.Read(buffer, 0, buffer.Length);
-
-                textout.Text = string.Empty;
-                textout.Text = Encoding.Unicode.GetString(buffer);
-            }
-
-            catch (SocketException se)
-            {
-                Console.WriteLine(se);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            Client.WriteAsync(Encoding.Unicode.GetBytes("Get Quote"));
+            textout.Text = Encoding.Unicode.GetString(await Client.ReadAsync());                           
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Method("exit");
-            client?.Close();
+            Client.WriteAsync(Encoding.Unicode.GetBytes("exit"));
+            Client.Close();
         }
     }
 }
