@@ -22,21 +22,24 @@ namespace ClientSpace
     public partial class MainWindow : Window
     {
         Client Client;
-        public MainWindow(Client client)
+        public MainWindow(ref Client client)
         {
             InitializeComponent();
             Client = client;
+            //Client = new Client();
+            //Client.ConnectAsync(new IPEndPoint(IPAddress.Parse("192.168.88.75"), 50000));
         }
 
-        private async  void Accept_Click(object sender, RoutedEventArgs e)
+        private  void Accept_Click(object sender, RoutedEventArgs e)
         {
-            Client.WriteAsync(Encoding.Unicode.GetBytes("Get Quote"));
-            textout.Text = Encoding.Unicode.GetString(await Client.ReadAsync());                           
+            Client.Write(Encoding.Unicode.GetBytes("get"));
+            MessageBox.Show(Encoding.Unicode.GetString(Client.Read()));
+            //textout.Text = Encoding.Unicode.GetString( Client.Read());                           
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            Client.WriteAsync(Encoding.Unicode.GetBytes("exit"));
+            Client.Write(Encoding.Unicode.GetBytes("exit"));
             Client.Close();
         }
     }

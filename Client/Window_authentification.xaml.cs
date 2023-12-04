@@ -21,33 +21,33 @@ namespace ClientSpace
     public partial class Window_authentification : Window
     {            
        public Window_authentification()
-        {
+       {
             InitializeComponent();
             
-        }
+       }
 
        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
+       {
             Client client;
             client = new Client();
             
             client.ConnectAsync(new IPEndPoint(IPAddress.Parse("192.168.88.75"), 50000));
             await Task.Delay(1000);
-            client.WriteAsync(Encoding.Unicode.GetBytes("auth" + Login_box.Text + " " + Password_box.Text));
+            client.Write(Encoding.Unicode.GetBytes("auth" + Login_box.Text + " " + Password_box.Text));
 
-            string str = Encoding.Unicode.GetString(await client.ReadAsync()).Replace("\0","");
+            string str = Encoding.Unicode.GetString(client.Read()).Replace("\0","");
 
             if (str == "yes") 
             {
-                MainWindow mainWindow = new MainWindow(client);
+                MainWindow mainWindow = new MainWindow(ref client);
                 mainWindow.Show();
                 this.Close();
             }
             else
             {
-                MessageBox.Show(Encoding.Unicode.GetString(await client.ReadAsync()));
+                MessageBox.Show(Encoding.Unicode.GetString( client.Read()));
             }
 
-        }
+       }
     }
 }

@@ -33,16 +33,22 @@ namespace ClientSpace
             
         }
 
-        public async Task<byte[]>  ReadAsync()
+        public byte[] Read()
         {
             byte[] buffer = new byte[256];
-            await stream.ReadAsync(buffer, 0, buffer.Length);
+            
+            do
+            {
+                stream.Read(buffer, 0, buffer.Length);
+                 
+            } while (stream.DataAvailable);
+            //await stream.ReadAsync(buffer, 0, buffer.Length);
             return buffer;
         }
 
-        public async void WriteAsync(byte[] request)
+        public  void Write(byte[] request)
         {                      
-            await stream.WriteAsync(request, 0, request.Length);
+             stream.Write(request, 0, request.Length);
         }
 
         public void Close()
