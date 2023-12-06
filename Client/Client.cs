@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -19,7 +17,7 @@ namespace ClientSpace
             tcpClient = new TcpClient();                      
         }
 
-        public async void ConnectAsync(IPEndPoint point)
+        public async Task ConnectAsync(IPEndPoint point)
         {
             try
             {
@@ -33,22 +31,22 @@ namespace ClientSpace
             
         }
 
-        public byte[] Read()
+        public async Task<byte[]> ReadAsync()
         {
             byte[] buffer = new byte[256];
             
             do
             {
-                stream.Read(buffer, 0, buffer.Length);
+                await stream.ReadAsync(buffer, 0, buffer.Length);
                  
             } while (stream.DataAvailable);
             //await stream.ReadAsync(buffer, 0, buffer.Length);
             return buffer;
         }
 
-        public  void Write(byte[] request)
+        public async Task WriteAsync(byte[] request)
         {                      
-             stream.Write(request, 0, request.Length);
+             await stream.WriteAsync(request, 0, request.Length);
         }
 
         public void Close()

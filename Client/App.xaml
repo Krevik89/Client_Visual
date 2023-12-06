@@ -15,10 +15,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="9">
-                            <TextBox Text="{TemplateBinding Text}" 
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="9">
+                            <TextBlock  Text="{TemplateBinding Text}" 
                              Background="Transparent" 
-                             BorderThickness="0" 
+                             
                              Foreground="{TemplateBinding Foreground}" 
                              Padding="{TemplateBinding Padding}"/>
                         </Border>

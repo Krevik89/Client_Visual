@@ -18,28 +18,25 @@ using System.Threading;
 
 namespace ClientSpace
 {
-    
+   
     public partial class MainWindow : Window
     {
         Client Client;
         public MainWindow(ref Client client)
         {
             InitializeComponent();
-            Client = client;
-            //Client = new Client();
-            //Client.ConnectAsync(new IPEndPoint(IPAddress.Parse("192.168.88.75"), 50000));
+            Client = client;           
         }
 
-        private  void Accept_Click(object sender, RoutedEventArgs e)
+        private  async void Accept_Click(object sender, RoutedEventArgs e)
         {
-            Client.Write(Encoding.Unicode.GetBytes("get"));
-            MessageBox.Show(Encoding.Unicode.GetString(Client.Read()));
-            //textout.Text = Encoding.Unicode.GetString( Client.Read());                           
+            await Client.WriteAsync(Encoding.Unicode.GetBytes("get"));
+            textout.Text = Encoding.Unicode.GetString(await Client.ReadAsync());                           
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private async void Window_Closed(object sender, EventArgs e)
         {
-            Client.Write(Encoding.Unicode.GetBytes("exit"));
+            await Client.WriteAsync(Encoding.Unicode.GetBytes("exit"));
             Client.Close();
         }
     }

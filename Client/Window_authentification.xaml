@@ -18,9 +18,9 @@
                  Foreground="White" HorizontalAlignment="Center"
                  Canvas.Top="35" VerticalAlignment="Top" 
                  BorderBrush="Transparent" IsHitTestVisible="False" />
-        <TextBox  x:Name="Login_box" Style="{StaticResource StyleTextBox1}" Canvas.Left="85" Canvas.Top="-1" />
-        <TextBox x:Name="Password_box" Style="{StaticResource StyleTextBox1}" Canvas.Left="85" Canvas.Top="30" HorizontalAlignment="Center" VerticalAlignment="Top"   />
-        <CheckBox Content="Remember Me" Canvas.Left="85" Canvas.Top="67"  Foreground="White" FontSize="14" Height="20" Width="120"/>
+        <TextBox  x:Name="Login_box" Style="{StaticResource StyleTextBox1}" Canvas.Left="85" Canvas.Top="-1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="107"/>
+        <TextBox  x:Name="Password_box" Style="{StaticResource StyleTextBox1}" Canvas.Left="85" Canvas.Top="30" HorizontalAlignment="Left" VerticalAlignment="Center" Width="107"/>
+        <CheckBox Content="Remember Me" Canvas.Left="85" Canvas.Top="67" Foreground="White" FontSize="14" Height="20" Width="120"/>
         <Button Content="Log In"  Canvas.Left="85" Canvas.Top="100"
                 Background="Green" Style="{StaticResource StyleButton}"
                 Click="Button_Click"/>
